@@ -8,22 +8,33 @@ class UserViewset(viewsets.ModelViewSet):
     queryset = PerevalUser.objects.all()
     serializer_class = UserSerializer
 class CoordinateViewset(viewsets.ModelViewSet):
+    """Пользователь (турист)"""
     queryset = PerevalCoordinate.objects.all()
     serializer_class = CoordinateSerializer
+
+
 class LevelViewset(viewsets.ModelViewSet):
+    """Координаты перевала"""
+
     queryset = PerevalLevel.objects.all()
     serializer_class = LevelSerializer
+
+
 class ImageViewset(viewsets.ModelViewSet):
+    """Уровни сложности в зависимости от сезона"""
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
 
 class PerevalCreateViewset(viewsets.ModelViewSet):
+    """Фотографии перевала"""
 
     queryset = PerevalAdded.objects.filter(id=0)
     serializer_class = PerevalSerializer
 
+
     def create(self, request, *args, **kwargs):
+        """Создание перевала"""
 
         serializer = PerevalSerializer(data=request.data)
         response_data = {}
@@ -57,7 +68,7 @@ class PerevalUpdateViewset(viewsets.ModelViewSet):
     serializer_class = PerevalSerializer
 
     def partial_update(self, request, *args, **kwargs):
-
+        """Обновление данных перевала"""
         pereval = self.get_object()
         serializer = PerevalSerializer(pereval, data=request.data, partial=True)
 
@@ -91,9 +102,8 @@ class PerevalListView(APIView):
         serializer = PerevalListSerializer(perevals, many=True)
 
         return Response(serializer.data)
-
-
 class PerevalUserListViewset(APIView):
+    """Вывод списка перевалов"""
 
     def get(self, request, email):
         perevals = PerevalAdded.objects.filter(user__email=email).order_by('id')
