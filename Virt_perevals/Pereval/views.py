@@ -32,16 +32,36 @@ class ImageViewset(viewsets.ModelViewSet):
 
 
 class PerevalViewset(viewsets.ModelViewSet):
-
-    queryset = PerevalAdded.objects.all()
+    queryset = PerevalAdded.objects.filter(id=0)
     serializer_class = PerevalSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = PerevalSerializer(data=request.data)
+        response_data = {}
+
+        if serializer.is_valid():
+            serializer.save()
+            response_data = {
+                'status': 200,
+                'message': '',
+                'id': serializer.data.get('id')
+            }
+
+        elif status.HTTP_500_INTERNAL_SERVER_ERROR:
+            response_data = {
+                'status': 500,
+                'message': 'Ошибка подключения к базе данных',
+                'id': serializer.data.get('id')
+            }
+
+        elif status.HTTP_400_BAD_REQUEST:
+            response_data = {
+                'status': 400,
+                'message': 'Неверный запрос',
+                'id': serializer.data.get('id')
+            }
+
+        return Response(response_data)
 
 
 class PerevalListView(APIView):
-
-    def get(self, request):
-
-        perevals = PerevalAdded.objects.all()
-        serializer = PerevalListSerializer(perevals, many=True)
-
-        return Response(serializer.data)
