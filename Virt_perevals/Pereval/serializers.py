@@ -36,7 +36,9 @@ class PerevalSerializer(WritableNestedModelSerializer):
     coord = CoordinateSerializer()
     level = LevelSerializer(allow_null=True, default=False)
     images = ImageSerializer(many=True)
+
     class Meta:
+
         model = PerevalAdded
         fields = [
             'id', 'status', 'beauty_title', 'title', 'other_title', 'connect',
