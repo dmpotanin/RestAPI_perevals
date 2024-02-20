@@ -35,15 +35,29 @@ class ImageSerializer(serializers.ModelSerializer):
 
 class PerevalSerializer(WritableNestedModelSerializer):
 
+    add_time = serializers.DateTimeField(format='%d-%m-%Y %H:%M:%S', read_only=True)
+    status = serializers.CharField(read_only=True)
     user = UserSerializer()
     coord = CoordinateSerializer()
     level = LevelSerializer(allow_null=True, default=False)
-    images = ImageSerializer(many=True)
 
     class Meta:
-
         model = PerevalAdded
         fields = [
-            'id', 'beauty_title', 'title', 'other_title', 'connect',
+            'id', 'status', 'beauty_title', 'title', 'other_title', 'connect',
             'add_time', 'user', 'coord', 'level', 'images'
         ]
+
+    class PerevalListSerializer(serializers.ModelSerializer):
+        images = ImageSerializer(many=True)
+        add_time = serializers.DateTimeField(format='%d-%m-%Y %H:%M:%S', read_only=True)
+        user = UserSerializer()
+        coord = CoordinateSerializer()
+        level = LevelSerializer(allow_null=True, default=False)
+
+        class Meta:
+            model = PerevalAdded
+            fields = [
+                'id', 'status', 'beauty_title', 'title', 'other_title', 'connect',
+                'add_time', 'user', 'coord', 'level', 'images'
+            ]

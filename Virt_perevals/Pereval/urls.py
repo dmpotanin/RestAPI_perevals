@@ -1,7 +1,13 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+
+from rest_framework import routers
+
+from Pereval.views import PerevalViewset, PerevalListView
+
+create_pereval = routers.DefaultRouter()
+create_pereval.register(r'pereval', PerevalViewset)
 
 urlpatterns = [
-    # path('pereval/', views.MovieListView.as_view()),
-    # path('pereval/<int:pk>/', views.MovieDetailView.as_view()),
+    path('perevals/', PerevalListView.as_view()),
+    path('perevals/create/', include(create_pereval.urls)),
 ]
