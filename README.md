@@ -165,4 +165,4 @@ ______
 
 ***Отчет о покрытии тестами:***
 
-![2023-04-10_002254](https://github.com/LNIK1/RestAPI_perevals/blob/main/Virt_perevals/coverage_tests.jpg)
+![2023-04-10_002254](https://github.com/dmpotanin/RestAPI_perevals/blob/main/Virt_perevals/coverage_tests.jpg)
