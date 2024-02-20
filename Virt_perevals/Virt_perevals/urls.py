@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from Pereval.yasg import url_patterns as doc_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Pereval.urls')),
 ]
+
+urlpatterns += doc_urls
