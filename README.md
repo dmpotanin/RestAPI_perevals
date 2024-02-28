@@ -156,13 +156,6 @@ ______
 
 _______
 
-***Проект опубликован на хостинге pythonanywhere.com***
-
-*API **Pereval**: https://LNik.pythonanywhere.com/perevals/*<br/>
-*Документация **swagger**: https://LNik.pythonanywhere.com/swagger/<br/>*
-
-______
-
 ***Отчет о покрытии тестами:***
 
 ![2023-04-10_002254](https://github.com/dmpotanin/RestAPI_perevals/blob/master/Virt_perevals/coverage_tests.jpg)
